@@ -1,0 +1,334 @@
+/*
+📌 Purpose: Preserve the approved worksheet exactly while making it responsive, tappable, and scroll-free.
+❓ Business Question: How can one fixed illustration work on different iPad screen sizes?
+👉 Keep the artwork in a 3:4 stage and scale the entire stage proportionally to the available viewport.
+🧠 Logic Summary:
+1. Center one 3:4 worksheet stage.
+2. Prevent document scrolling and touch-callout behavior.
+3. Position controls using percentages tied to the artwork.
+4. Show only subtle selection and feedback overlays.
+*/
+
+:root {
+  --focus-purple: #7850b7;
+  --correct-green: #55a934;
+  --wrong-red: #d65d69;
+  --feedback-cream: rgba(255, 247, 204, 0.98);
+  --feedback-text: #5a412c;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: #f7f0df;
+}
+
+body {
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  width: 100%;
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 10%, #fffdf7 0%, #f7f0df 58%, #e9dfca 100%);
+}
+
+.worksheet {
+  position: relative;
+  width: min(100vw, 75dvh);
+  aspect-ratio: 3 / 4;
+  max-height: 100dvh;
+  overflow: hidden;
+  background: #fffaf0;
+}
+
+.worksheet-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.answer-hotspot,
+.check-hotspot {
+  position: absolute;
+  appearance: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 3.2%;
+}
+
+.answer-hotspot::after {
+  content: "";
+  position: absolute;
+  inset: 1.5%;
+  border: clamp(3px, 0.45vw, 7px) solid transparent;
+  border-radius: 7%;
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.answer-hotspot:active::after {
+  transform: scale(0.985);
+}
+
+.answer-hotspot.selected::after {
+  border-color: var(--focus-purple);
+  box-shadow:
+    0 0 0 clamp(2px, 0.28vw, 5px) rgba(255, 255, 255, 0.92),
+    0 0 clamp(12px, 1.8vw, 26px) rgba(120, 80, 183, 0.72);
+  background: rgba(120, 80, 183, 0.08);
+}
+
+.answer-hotspot.correct::after {
+  border-color: var(--correct-green);
+  box-shadow:
+    0 0 0 clamp(2px, 0.28vw, 5px) rgba(255, 255, 255, 0.94),
+    0 0 clamp(13px, 2vw, 30px) rgba(85, 169, 52, 0.8);
+  background: rgba(85, 169, 52, 0.13);
+}
+
+.answer-hotspot.wrong::after {
+  border-color: var(--wrong-red);
+  background: rgba(214, 93, 105, 0.11);
+  animation: gentle-shake 320ms ease;
+}
+
+.answer-hotspot:focus-visible::after,
+.check-hotspot:focus-visible {
+  outline: clamp(3px, 0.4vw, 6px) solid #2d64d8;
+  outline-offset: 2px;
+}
+
+.answer-hotspot:disabled {
+  cursor: default;
+}
+
+/*
+📌 Purpose: Match each interactive answer to its exact illustrated card.
+❓ Business Question: Where should Bella be able to tap?
+👉 The full visible area of each A/B/C/D card is tappable.
+🧠 Logic Summary:
+1. Use percentage coordinates from the 1086 × 1448 approved artwork.
+2. Keep those coordinates proportional at every screen size.
+*/
+.answer-a {
+  left: 4.5%;
+  top: 59.55%;
+  width: 43.1%;
+  height: 10.55%;
+}
+
+.answer-b {
+  left: 49.45%;
+  top: 59.55%;
+  width: 43.25%;
+  height: 10.55%;
+}
+
+.answer-c {
+  left: 4.5%;
+  top: 71.15%;
+  width: 43.1%;
+  height: 10.8%;
+}
+
+.answer-d {
+  left: 49.45%;
+  top: 71.15%;
+  width: 43.25%;
+  height: 10.8%;
+}
+
+.check-hotspot {
+  left: 24.1%;
+  top: 89.25%;
+  width: 50.2%;
+  height: 7.2%;
+  border-radius: 18% / 48%;
+}
+
+.check-hotspot:not(:disabled):active {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(0.985);
+}
+
+.check-hotspot:disabled {
+  cursor: not-allowed;
+}
+
+/*
+📌 Purpose: Replace the static hint sentence with live activity feedback.
+❓ Business Question: How can the graphic react without changing the approved illustration?
+👉 Place a matching cream feedback pill directly over the illustrated hint area.
+🧠 Logic Summary:
+1. Cover the original hint line.
+2. Reuse the same visual shape and color family.
+3. Update only the sentence and star color.
+*/
+.feedback-overlay {
+  position: absolute;
+  left: 12.25%;
+  top: 83.37%;
+  width: 71.4%;
+  height: 5.05%;
+  padding: 0 4.2% 0 9.5%;
+  display: flex;
+  align-items: center;
+  color: var(--feedback-text);
+  background: var(--feedback-cream);
+  border: 1px solid rgba(221, 179, 72, 0.45);
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(118, 91, 45, 0.09);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(12px, 2.5vw, 27px);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.feedback-star {
+  position: absolute;
+  left: 2.2%;
+  top: 50%;
+  transform: translateY(-52%);
+  color: #f5b832;
+  font-family: Arial, sans-serif;
+  font-size: clamp(24px, 5.5vw, 58px);
+  line-height: 1;
+  text-shadow:
+    0 2px 0 #d59017,
+    0 4px 6px rgba(126, 80, 14, 0.22);
+}
+
+.feedback-overlay.is-correct {
+  background: rgba(233, 249, 218, 0.98);
+  border-color: rgba(85, 169, 52, 0.5);
+  color: #356523;
+}
+
+.feedback-overlay.is-correct .feedback-star {
+  color: #72bc4d;
+}
+
+.feedback-overlay.is-wrong {
+  background: rgba(255, 247, 204, 0.98);
+  color: #5a412c;
+}
+
+.success-burst {
+  position: absolute;
+  inset: 0;
+  display: none;
+  pointer-events: none;
+}
+
+.success-burst.show {
+  display: block;
+}
+
+.success-burst span {
+  position: absolute;
+  color: #f6bd37;
+  font-size: clamp(28px, 6vw, 72px);
+  filter: drop-shadow(0 4px 3px rgba(128, 82, 13, 0.2));
+  animation: star-pop 720ms ease both;
+}
+
+.success-burst span:nth-child(1) {
+  left: 18%;
+  top: 54%;
+}
+
+.success-burst span:nth-child(2) {
+  left: 47%;
+  top: 50%;
+  animation-delay: 80ms;
+}
+
+.success-burst span:nth-child(3) {
+  right: 16%;
+  top: 54%;
+  animation-delay: 150ms;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes gentle-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  30% {
+    transform: translateX(-1.2%);
+  }
+
+  65% {
+    transform: translateX(1.2%);
+  }
+}
+
+@keyframes star-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(18%) scale(0.25) rotate(-18deg);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translateY(-25%) scale(1.2) rotate(8deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-55%) scale(0.9) rotate(18deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .answer-hotspot::after,
+  .success-burst span {
+    animation: none;
+    transition: none;
+  }
+}
