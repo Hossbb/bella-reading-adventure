@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+  📌 Purpose: Display Bella's approved worksheet artwork as a real interactive iPad activity.
+  ❓ Business Question: Can Bella tap the graphic exactly as designed and receive immediate feedback?
+  👉 Yes. Accessible HTML buttons are positioned over the illustrated answer cards and Check Answer button.
+  🧠 Logic Summary:
+  1. Scale the approved 3:4 artwork to fit the screen without scrolling.
+  2. Place four invisible semantic answer buttons over A, B, C, and D.
+  3. Place a real action button over the illustrated Check Answer control.
+  4. Show selection, retry, and success states with lightweight overlays.
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff8e9">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Bella Reads">
+
+  <title>Bella's Reading Adventure</title>
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icons/bella-reading-icon.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <main class="app-shell">
+    <section
+      class="worksheet"
+      id="worksheet"
+      aria-label="Bella's Reading Adventure worksheet"
+    >
+      <img
+        class="worksheet-art"
+        src="assets/worksheets/lost-foal.webp"
+        alt="Illustrated reading worksheet about Bella the pony helping a lost foal."
+        draggable="false"
+      >
+
+      <div
+        class="feedback-overlay"
+        id="feedback"
+        role="status"
+        aria-live="polite"
+      >
+        <span class="feedback-star" aria-hidden="true">★</span>
+        <span id="feedbackText">Choose the best answer.</span>
+      </div>
+
+      <div class="answer-layer" aria-label="Answer choices">
+        <button
+          class="answer-hotspot answer-a"
+          type="button"
+          data-answer="A"
+          aria-label="A. She wanted to play games with him."
+        ></button>
+
+        <button
+          class="answer-hotspot answer-b"
+          type="button"
+          data-answer="B"
+          aria-label="B. She wanted to help him feel brave."
+        ></button>
+
+        <button
+          class="answer-hotspot answer-c"
+          type="button"
+          data-answer="C"
+          aria-label="C. She wanted him to find her hidden toys."
+        ></button>
+
+        <button
+          class="answer-hotspot answer-d"
+          type="button"
+          data-answer="D"
+          aria-label="D. She wanted to win a big prize."
+        ></button>
+      </div>
+
+      <button
+        class="check-hotspot"
+        id="checkButton"
+        type="button"
+        aria-label="Check answer"
+        disabled
+      >
+        <span class="sr-only">Check Answer</span>
+      </button>
+
+      <div class="success-burst" id="successBurst" aria-hidden="true">
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
