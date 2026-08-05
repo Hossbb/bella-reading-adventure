@@ -1,13 +1,14 @@
 /*
-📌 Purpose: Make the approved worksheet answer cards and Check Answer button interactive.
-❓ Business Question: How does Bella select, check, retry, and complete the displayed question?
-👉 She taps one answer, checks it, receives gentle feedback, and can retry until she finds the clue.
+📌 Purpose: Load the approved high-resolution artwork and make its answer cards interactive.
+❓ Business Question: How can Bella select, check, retry, and complete the displayed question?
+👉 She taps one answer, checks it, receives gentle feedback, and retries until she finds the clue.
 🧠 Logic Summary:
-1. Track Bella's selected answer.
-2. Enable the check control after a selection.
-3. Mark B as the correct answer.
-4. Clear an incorrect selection and invite another try.
-5. Lock the choices and celebrate after the correct answer.
+1. Join the four high-resolution artwork data parts.
+2. Replace the temporary low-resolution image.
+3. Track Bella's selected answer.
+4. Check whether the selected answer is B.
+5. Give a calm retry after a mistake.
+6. Lock the choices and celebrate after the correct answer.
 */
 
 const CORRECT_ANSWER = "B";
@@ -20,19 +21,19 @@ const checkButton = document.getElementById("checkButton");
 const feedback = document.getElementById("feedback");
 const feedbackText = document.getElementById("feedbackText");
 const successBurst = document.getElementById("successBurst");
-const worksheetArt = document.querySelector(".worksheet-art");
+const worksheetArt = document.getElementById("worksheetArt");
 
 /*
 ❓ What does this expression do? Why do we need it?
-👉 It joins the image-data files and loads the approved worksheet graphic without requiring a binary upload.
+👉 It combines the four GitHub-hosted image-data files and loads the approved artwork at a much higher resolution than the temporary preview.
 */
-if (window.BELLA_IMAGE_CHUNKS?.length) {
-  worksheetArt.src = `data:image/webp;base64,${window.BELLA_IMAGE_CHUNKS.join("")}`;
+if (window.__WORKSHEET_PARTS?.length === 4) {
+  worksheetArt.src = `data:image/avif;base64,${window.__WORKSHEET_PARTS.join("")}`;
 }
 
 /*
 ❓ What does this expression do? Why do we need it?
-👉 It visually clears previous selections while preserving a completed correct state when necessary.
+👉 It removes old selection and incorrect-answer outlines before Bella makes another choice.
 */
 function clearTransientStates() {
   answerButtons.forEach((button) => {
@@ -42,7 +43,7 @@ function clearTransientStates() {
 
 /*
 ❓ What does this expression do? Why do we need it?
-👉 It records Bella's current choice, highlights the complete illustrated card, and enables the Check Answer button.
+👉 It records Bella's current choice, outlines the complete illustrated answer card, and enables Check Answer.
 */
 function selectAnswer(button) {
   if (completed) {
@@ -61,7 +62,7 @@ function selectAnswer(button) {
 
 /*
 ❓ What does this expression do? Why do we need it?
-👉 It compares Bella's choice with B, gives a calm retry after a mistake, and celebrates when she finds the correct answer.
+👉 It compares Bella's selection with B, gives a gentle retry after a mistake, and celebrates the correct answer.
 */
 function checkAnswer() {
   if (!selectedAnswer || completed) {
@@ -83,10 +84,8 @@ function checkAnswer() {
     });
 
     checkButton.disabled = true;
-
     feedback.className = "feedback-overlay is-correct";
     feedbackText.textContent = "Great reading! You found the clue.";
-
     successBurst.classList.add("show");
 
     window.setTimeout(() => {
