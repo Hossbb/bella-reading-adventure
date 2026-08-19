@@ -8,13 +8,16 @@
 :root{--blue:#238bc5;--navy:#154f83;--green:#4caf50;--red:#ef5b4c;--yellow:#f4bd32}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#dff5ff,#fff6e7);font-family:system-ui,-apple-system,"Avenir Next",sans-serif;color:#173b61}.app{width:min(100%,780px);margin:auto;padding:12px 12px 32px}.page{display:none}.page:target{display:block}#cover{display:block}body:has(.page:target)#cover{display:none}.book{position:relative;width:100%;aspect-ratio:3/4;border-radius:22px;overflow:hidden;background:#d9edf5;box-shadow:0 10px 30px #0003;border:3px solid #fff;background-repeat:no-repeat;background-size:100% 1000%}.loading{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;color:#54738a;background:#eef8fc}.book.ready .loading{display:none}.nav{display:flex;gap:10px;margin:14px 2px 0}.btn{flex:1;display:block;text-align:center;text-decoration:none;padding:15px 12px;border-radius:18px;background:var(--blue);color:#fff;font-size:20px;font-weight:850;box-shadow:0 5px 0 #126b96}.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #126b96}.secondary{background:#fff;color:var(--navy);box-shadow:0 5px 0 #cbdde7}.good{background:var(--green);box-shadow:0 5px 0 #2f8236}.feedback{background:#fff;border-radius:24px;padding:26px 20px;margin:18vh auto 0;box-shadow:0 10px 30px #0003;text-align:center;max-width:620px}.feedback h2{font-size:30px;margin:0 0 10px}.feedback p{font-size:20px;line-height:1.45;margin:0 0 20px}.hotspots{position:absolute;left:5.3%;right:5.3%;bottom:2.1%;height:21.2%;display:grid;grid-template-columns:repeat(3,1fr);gap:1.8%;z-index:4}.hotspots a{display:block;border-radius:18px;text-decoration:none;color:transparent;-webkit-tap-highlight-color:transparent}.hotspots a:active{outline:5px solid rgba(255,255,255,.9);background:rgba(255,255,255,.12)}.hint{text-align:center;font-size:14px;font-weight:700;color:#54738a;margin-top:7px}@media(max-width:480px){.app{padding:8px 8px 24px}.book{border-radius:17px}.btn{font-size:18px;padding:14px 10px}.hotspots a{border-radius:12px}}
 </style>
-<script src="story-hi/part01.js"></script>
-<script src="story-hi/part02.js"></script>
-<script src="story-hi/part03.js"></script>
-<script src="story-hi/part04.js"></script>
-<script src="story-hi/part05.js"></script>
-<script src="story-hi/part06.js"></script>
-<script src="story-hi/part07.js"></script>
+<script src="parts/part01.js"></script>
+<script src="parts/part02.js"></script>
+<script src="parts/part03.js"></script>
+<script src="parts/part04.js"></script>
+<script src="parts/part05.js"></script>
+<script src="parts/part06.js"></script>
+<script src="parts/part07.js"></script>
+<script src="parts/part08.js"></script>
+<script src="parts/part09.js"></script>
+<script src="parts/part10.js"></script>
 </head>
 <body>
 <div class="app">
@@ -37,9 +40,9 @@
 </div>
 <script>
 (function(){
-  var data=window.__ddhi||'';
-  if(!data)return;
-  var uri='url("data:image/avif;base64,'+data+'")';
+  var data=window.__story||'';
+  if(!data){document.querySelectorAll('.loading').forEach(function(x){x.textContent='Cartoon failed to load';});return;}
+  var uri='url("data:image/webp;base64,'+data+'")';
   document.querySelectorAll('.book').forEach(function(el){
     var i=Number(el.dataset.i||0);
     el.style.backgroundImage=uri;
