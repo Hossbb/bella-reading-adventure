@@ -6,14 +6,15 @@
 <meta name="theme-color" content="#e9f7ff">
 <title>Danny Chooses Kindness</title>
 <style>
-:root{--blue:#258fc8;--navy:#164f82;--green:#4caf50;--cream:#fff8eb}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#dff5ff,#fff8eb);font-family:system-ui,-apple-system,"Avenir Next",sans-serif;color:#173b61}.app{width:min(100%,780px);margin:auto;padding:10px 10px 34px}.page{display:none}.page:target{display:block}#cover{display:block}body:has(.page:not(#cover):target) #cover{display:none}.book{position:relative;width:100%;aspect-ratio:3/4;border-radius:22px;overflow:hidden;background-color:#dceff7;background-image:url('sprite.webp?v=4');background-repeat:no-repeat;background-size:100% 1000%;box-shadow:0 10px 28px #0003;border:3px solid #fff}.p0{background-position:center 0%}.p1{background-position:center 11.111111%}.p2{background-position:center 22.222222%}.p3{background-position:center 33.333333%}.p4{background-position:center 44.444444%}.p5{background-position:center 55.555556%}.p6{background-position:center 66.666667%}.p7{background-position:center 77.777778%}.p8{background-position:center 88.888889%}.p9{background-position:center 100%}.nav{display:flex;gap:10px;margin:14px 2px 0}.btn{flex:1;display:block;text-align:center;text-decoration:none;padding:16px 12px;border-radius:20px;background:var(--blue);color:#fff;font-size:21px;font-weight:850;box-shadow:0 5px 0 #126b96;-webkit-tap-highlight-color:transparent}.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #126b96}.secondary{background:#fff;color:var(--navy);box-shadow:0 5px 0 #cbdde7}.good{background:var(--green);box-shadow:0 5px 0 #2f8236}.feedback{background:#fff;border-radius:24px;padding:26px 20px;margin:16vh auto 0;box-shadow:0 10px 28px #0003;text-align:center;max-width:620px}.feedback h2{font-size:30px;margin:0 0 10px}.feedback p{font-size:20px;line-height:1.45;margin:0 0 20px}.hotspots{position:absolute;left:5.4%;right:5.4%;bottom:1.8%;height:21.8%;display:grid;grid-template-columns:repeat(3,1fr);gap:1.8%;z-index:4}.hotspots a{display:block;border-radius:16px;text-decoration:none;-webkit-tap-highlight-color:rgba(255,255,255,.2)}.hotspots a:active{outline:4px solid rgba(255,255,255,.9);background:rgba(255,255,255,.12)}.hint{text-align:center;font-size:14px;font-weight:700;color:#54738a;margin-top:7px}@media(max-width:480px){.app{padding:8px 8px 28px}.book{border-radius:17px}.btn{font-size:19px;padding:15px 10px}.hotspots a{border-radius:12px}}
+:root{--blue:#258fc8;--navy:#164f82;--green:#4caf50;--cream:#fff8eb;--sprite:none}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#dff5ff,#fff8eb);font-family:system-ui,-apple-system,"Avenir Next",sans-serif;color:#173b61}.app{width:min(100%,780px);margin:auto;padding:10px 10px 34px}.page{display:none}.page:target{display:block}#cover{display:block}body:has(.page:not(#cover):target) #cover{display:none}.book{position:relative;width:100%;aspect-ratio:3/4;border-radius:22px;overflow:hidden;background-color:#dceff7;background-image:var(--sprite);background-repeat:no-repeat;background-size:100% 1000%;box-shadow:0 10px 28px #0003;border:3px solid #fff}.book:after{content:"Loading artwork…";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;color:#54738a;background:#dceff7}.assets-ready .book:after{display:none}.p0{background-position:center 0%}.p1{background-position:center 11.111111%}.p2{background-position:center 22.222222%}.p3{background-position:center 33.333333%}.p4{background-position:center 44.444444%}.p5{background-position:center 55.555556%}.p6{background-position:center 66.666667%}.p7{background-position:center 77.777778%}.p8{background-position:center 88.888889%}.p9{background-position:center 100%}.nav{display:flex;gap:10px;margin:14px 2px 0}.btn{flex:1;display:block;text-align:center;text-decoration:none;padding:16px 12px;border-radius:20px;background:var(--blue);color:#fff;font-size:21px;font-weight:850;box-shadow:0 5px 0 #126b96;-webkit-tap-highlight-color:transparent}.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #126b96}.secondary{background:#fff;color:var(--navy);box-shadow:0 5px 0 #cbdde7}.good{background:var(--green);box-shadow:0 5px 0 #2f8236}.feedback{background:#fff;border-radius:24px;padding:26px 20px;margin:16vh auto 0;box-shadow:0 10px 28px #0003;text-align:center;max-width:620px}.feedback h2{font-size:30px;margin:0 0 10px}.feedback p{font-size:20px;line-height:1.45;margin:0 0 20px}.hotspots{position:absolute;left:5.4%;right:5.4%;bottom:1.8%;height:21.8%;display:grid;grid-template-columns:repeat(3,1fr);gap:1.8%;z-index:4}.hotspots a{display:block;border-radius:16px;text-decoration:none;-webkit-tap-highlight-color:rgba(255,255,255,.2)}.hotspots a:active{outline:4px solid rgba(255,255,255,.9);background:rgba(255,255,255,.12)}.hint{text-align:center;font-size:14px;font-weight:700;color:#54738a;margin-top:7px}.asset-error{display:none;background:#fff1f0;color:#8a2520;border:2px solid #e8b5b2;border-radius:18px;padding:14px;margin:10px 0;font-weight:750}.assets-failed .asset-error{display:block}.assets-failed .book:after{content:"Artwork failed to load — refresh once."}@media(max-width:480px){.app{padding:8px 8px 28px}.book{border-radius:17px}.btn{font-size:19px;padding:15px 10px}.hotspots a{border-radius:12px}}
 </style>
 </head>
 <body>
 <div class="app">
+<div class="asset-error">The artwork did not decode. Refresh this page once; if it remains, the page will visibly report the failure instead of showing an unexplained blank box.</div>
 <section class="page" id="cover"><div class="book p0" role="img" aria-label="Danny Chooses Kindness cover"></div><div class="nav"><a class="btn" href="#p1">Start Story</a></div></section>
-<section class="page" id="p1"><div class="book p1" role="img" aria-label="Danny and Bella begin art time"></div><div class="nav"><a class="btn secondary" href="./?v=4">Back</a><a class="btn" href="#p2">Next</a></div></section>
+<section class="page" id="p1"><div class="book p1" role="img" aria-label="Danny and Bella begin art time"></div><div class="nav"><a class="btn secondary" href="#cover">Back</a><a class="btn" href="#p2">Next</a></div></section>
 <section class="page" id="p2"><div class="book p2" role="img" aria-label="Danny pauses and thinks"></div><div class="nav"><a class="btn secondary" href="#p1">Back</a><a class="btn" href="#p3">Next</a></div></section>
 <section class="page" id="p3"><div class="book p3" role="img" aria-label="What should Danny do with the marker?"><div class="hotspots"><a href="#wrong1" aria-label="Grab it"></a><a href="#p4" aria-label="Ask politely"></a><a href="#wait1" aria-label="Wait for a turn"></a></div></div><div class="hint">Tap one of the three choices in the picture.</div><div class="nav"><a class="btn secondary" href="#p2">Back</a></div></section>
 <section class="page" id="wrong1"><div class="feedback"><h2>Try again</h2><p>Grabbing could make Bella feel upset. Danny can pause and choose kind words.</p><a class="btn" href="#p3">Choose Again</a></div></section>
@@ -27,7 +28,28 @@
 <section class="page" id="p8"><div class="book p8" role="img" aria-label="What should Danny do with the last sticker sheet?"><div class="hotspots"><a href="#wrong3" aria-label="Snatch it"></a><a href="#turns3" aria-label="Take turns"></a><a href="#p9" aria-label="Share together"></a></div></div><div class="hint">Tap one of the three choices in the picture.</div><div class="nav"><a class="btn secondary" href="#p7">Back</a></div></section>
 <section class="page" id="wrong3"><div class="feedback"><h2>Try again</h2><p>Snatching could hurt feelings. Danny can choose a fair solution.</p><a class="btn" href="#p8">Choose Again</a></div></section>
 <section class="page" id="turns3"><div class="feedback"><h2>Fair choice ⭐</h2><p>Taking turns is a good solution. Danny and Bella can also share together.</p><a class="btn good" href="#p9">Continue</a></div></section>
-<section class="page" id="p9"><div class="book p9" role="img" aria-label="Danny and Bella finish their rainbow together"></div><div class="nav"><a class="btn secondary" href="#p8">Back</a><a class="btn" href="./?v=4">Read Again</a></div></section>
+<section class="page" id="p9"><div class="book p9" role="img" aria-label="Danny and Bella finish their rainbow together"></div><div class="nav"><a class="btn secondary" href="#p8">Back</a><a class="btn" href="#cover">Read Again</a></div></section>
 </div>
+<script src="story-hi/part01.js?v=5"></script>
+<script src="story-hi/part02.js?v=5"></script>
+<script src="story-hi/part03.js?v=5"></script>
+<script src="story-hi/part04.js?v=5"></script>
+<script src="story-hi/part05.js?v=5"></script>
+<script src="story-hi/part06.js?v=5"></script>
+<script src="story-hi/part07.js?v=5"></script>
+<script>
+(function(){
+  var b64=window.__ddhi||'';
+  if(!b64){document.body.classList.add('assets-failed');return;}
+  var src='data:image/avif;base64,'+b64;
+  var probe=new Image();
+  probe.onload=function(){
+    document.documentElement.style.setProperty('--sprite','url("'+src+'")');
+    document.body.classList.add('assets-ready');
+  };
+  probe.onerror=function(){document.body.classList.add('assets-failed');};
+  probe.src=src;
+})();
+</script>
 </body>
 </html>
