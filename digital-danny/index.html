@@ -3,52 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#e9f7ff">
 <title>Danny Chooses Kindness</title>
 <style>
-:root{--blue:#238bc5;--navy:#154f83;--green:#4caf50;--red:#ef5b4c;--yellow:#f4bd32}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#dff5ff,#fff6e7);font-family:system-ui,-apple-system,"Avenir Next",sans-serif;color:#173b61}.app{width:min(100%,780px);margin:auto;padding:12px 12px 32px}.page{display:none}.page:target{display:block}#cover{display:block}body:has(.page:target)#cover{display:none}.book{position:relative;width:100%;aspect-ratio:3/4;border-radius:22px;overflow:hidden;background:#d9edf5;box-shadow:0 10px 30px #0003;border:3px solid #fff;background-repeat:no-repeat;background-size:100% 1000%}.loading{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;color:#54738a;background:#eef8fc}.book.ready .loading{display:none}.nav{display:flex;gap:10px;margin:14px 2px 0}.btn{flex:1;display:block;text-align:center;text-decoration:none;padding:15px 12px;border-radius:18px;background:var(--blue);color:#fff;font-size:20px;font-weight:850;box-shadow:0 5px 0 #126b96}.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #126b96}.secondary{background:#fff;color:var(--navy);box-shadow:0 5px 0 #cbdde7}.good{background:var(--green);box-shadow:0 5px 0 #2f8236}.feedback{background:#fff;border-radius:24px;padding:26px 20px;margin:18vh auto 0;box-shadow:0 10px 30px #0003;text-align:center;max-width:620px}.feedback h2{font-size:30px;margin:0 0 10px}.feedback p{font-size:20px;line-height:1.45;margin:0 0 20px}.hotspots{position:absolute;left:5.3%;right:5.3%;bottom:2.1%;height:21.2%;display:grid;grid-template-columns:repeat(3,1fr);gap:1.8%;z-index:4}.hotspots a{display:block;border-radius:18px;text-decoration:none;color:transparent;-webkit-tap-highlight-color:transparent}.hotspots a:active{outline:5px solid rgba(255,255,255,.9);background:rgba(255,255,255,.12)}.hint{text-align:center;font-size:14px;font-weight:700;color:#54738a;margin-top:7px}@media(max-width:480px){.app{padding:8px 8px 24px}.book{border-radius:17px}.btn{font-size:18px;padding:14px 10px}.hotspots a{border-radius:12px}}
+:root{--blue:#258fc8;--navy:#164f82;--green:#4caf50;--cream:#fff8eb}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#dff5ff,#fff8eb);font-family:system-ui,-apple-system,"Avenir Next",sans-serif;color:#173b61}.app{width:min(100%,780px);margin:auto;padding:10px 10px 34px}.page{display:none}.page:target{display:block}#cover{display:block}body:has(.page:not(#cover):target) #cover{display:none}.book{position:relative;width:100%;aspect-ratio:3/4;border-radius:22px;overflow:hidden;background-color:#dceff7;background-image:url('sprite.webp?v=4');background-repeat:no-repeat;background-size:100% 1000%;box-shadow:0 10px 28px #0003;border:3px solid #fff}.p0{background-position:center 0%}.p1{background-position:center 11.111111%}.p2{background-position:center 22.222222%}.p3{background-position:center 33.333333%}.p4{background-position:center 44.444444%}.p5{background-position:center 55.555556%}.p6{background-position:center 66.666667%}.p7{background-position:center 77.777778%}.p8{background-position:center 88.888889%}.p9{background-position:center 100%}.nav{display:flex;gap:10px;margin:14px 2px 0}.btn{flex:1;display:block;text-align:center;text-decoration:none;padding:16px 12px;border-radius:20px;background:var(--blue);color:#fff;font-size:21px;font-weight:850;box-shadow:0 5px 0 #126b96;-webkit-tap-highlight-color:transparent}.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #126b96}.secondary{background:#fff;color:var(--navy);box-shadow:0 5px 0 #cbdde7}.good{background:var(--green);box-shadow:0 5px 0 #2f8236}.feedback{background:#fff;border-radius:24px;padding:26px 20px;margin:16vh auto 0;box-shadow:0 10px 28px #0003;text-align:center;max-width:620px}.feedback h2{font-size:30px;margin:0 0 10px}.feedback p{font-size:20px;line-height:1.45;margin:0 0 20px}.hotspots{position:absolute;left:5.4%;right:5.4%;bottom:1.8%;height:21.8%;display:grid;grid-template-columns:repeat(3,1fr);gap:1.8%;z-index:4}.hotspots a{display:block;border-radius:16px;text-decoration:none;-webkit-tap-highlight-color:rgba(255,255,255,.2)}.hotspots a:active{outline:4px solid rgba(255,255,255,.9);background:rgba(255,255,255,.12)}.hint{text-align:center;font-size:14px;font-weight:700;color:#54738a;margin-top:7px}@media(max-width:480px){.app{padding:8px 8px 28px}.book{border-radius:17px}.btn{font-size:19px;padding:15px 10px}.hotspots a{border-radius:12px}}
 </style>
-<script src="parts/part01.js"></script>
-<script src="parts/part02.js"></script>
-<script src="parts/part03.js"></script>
-<script src="parts/part04.js"></script>
-<script src="parts/part05.js"></script>
-<script src="parts/part06.js"></script>
-<script src="parts/part07.js"></script>
-<script src="parts/part08.js"></script>
-<script src="parts/part09.js"></script>
-<script src="parts/part10.js"></script>
 </head>
 <body>
 <div class="app">
-<section class="page" id="cover"><div class="book" data-i="0"><div class="loading">Loading cartoon…</div></div><div class="nav"><a class="btn" href="#p1">Start Story</a></div></section>
-<section class="page" id="p1"><div class="book" data-i="1"><div class="loading">Loading cartoon…</div></div><div class="nav"><a class="btn secondary" href="#cover">Back</a><a class="btn" href="#p2">Next</a></div></section>
-<section class="page" id="p2"><div class="book" data-i="2"><div class="loading">Loading cartoon…</div></div><div class="nav"><a class="btn secondary" href="#p1">Back</a><a class="btn" href="#p3">Next</a></div></section>
-<section class="page" id="p3"><div class="book" data-i="3"><div class="loading">Loading cartoon…</div><div class="hotspots"><a href="#wrong1" aria-label="Grab it"></a><a href="#p4" aria-label="Ask politely"></a><a href="#wait1" aria-label="Wait for a turn"></a></div></div><div class="hint">Tap one of the three choices in the picture.</div><div class="nav"><a class="btn secondary" href="#p2">Back</a></div></section>
+<section class="page" id="cover"><div class="book p0" role="img" aria-label="Danny Chooses Kindness cover"></div><div class="nav"><a class="btn" href="#p1">Start Story</a></div></section>
+<section class="page" id="p1"><div class="book p1" role="img" aria-label="Danny and Bella begin art time"></div><div class="nav"><a class="btn secondary" href="./?v=4">Back</a><a class="btn" href="#p2">Next</a></div></section>
+<section class="page" id="p2"><div class="book p2" role="img" aria-label="Danny pauses and thinks"></div><div class="nav"><a class="btn secondary" href="#p1">Back</a><a class="btn" href="#p3">Next</a></div></section>
+<section class="page" id="p3"><div class="book p3" role="img" aria-label="What should Danny do with the marker?"><div class="hotspots"><a href="#wrong1" aria-label="Grab it"></a><a href="#p4" aria-label="Ask politely"></a><a href="#wait1" aria-label="Wait for a turn"></a></div></div><div class="hint">Tap one of the three choices in the picture.</div><div class="nav"><a class="btn secondary" href="#p2">Back</a></div></section>
 <section class="page" id="wrong1"><div class="feedback"><h2>Try again</h2><p>Grabbing could make Bella feel upset. Danny can pause and choose kind words.</p><a class="btn" href="#p3">Choose Again</a></div></section>
 <section class="page" id="wait1"><div class="feedback"><h2>Good thinking ⭐</h2><p>Waiting is calm and patient. Danny can also tell Bella what he needs.</p><a class="btn good" href="#p4">Continue</a></div></section>
-<section class="page" id="p4"><div class="book" data-i="4"><div class="loading">Loading cartoon…</div></div><div class="nav"><a class="btn secondary" href="#p3">Back</a><a class="btn" href="#p5">Next</a></div></section>
-<section class="page" id="p5"><div class="book" data-i="5"><div class="loading">Loading cartoon…</div></div><div class="nav"><a class="btn secondary" href="#p4">Back</a><a class="btn" href="#p6">Next</a></div></section>
-<section class="page" id="p6"><div class="book" data-i="6"><div class="loading">Loading cartoon…</div><div class="hotspots"><a href="#wrong2a" aria-label="Yell"></a><a href="#p7" aria-label="Take a deep breath and talk"></a><a href="#wrong2b" aria-label="Rip the paper"></a></div></div><div class="hint">Tap one of the three choices in the picture.</div><div class="nav"><a class="btn secondary" href="#p5">Back</a></div></section>
-<section class="page" id="wrong2a"><div class="feedback"><h2>Yelling makes it harder</h2><p>Danny is allowed to feel upset. He can calm his body first and then use his words.</p><a class="btn" href="#p6">Try Again</a></div></section>
-<section class="page" id="wrong2b"><div class="feedback"><h2>That makes the problem bigger</h2><p>Ripping the paper will not fix the accident. Danny can pause, breathe, and talk.</p><a class="btn" href="#p6">Try Again</a></div></section>
-<section class="page" id="p7"><div class="book" data-i="7"><div class="loading">Loading cartoon…</div></div><div class="nav"><a class="btn secondary" href="#p6">Back</a><a class="btn" href="#p8">Next</a></div></section>
-<section class="page" id="p8"><div class="book" data-i="8"><div class="loading">Loading cartoon…</div><div class="hotspots"><a href="#wrong3" aria-label="Snatch it"></a><a href="#turns3" aria-label="Take turns"></a><a href="#p9" aria-label="Share together"></a></div></div><div class="hint">Tap one of the three choices in the picture.</div><div class="nav"><a class="btn secondary" href="#p7">Back</a></div></section>
-<section class="page" id="wrong3"><div class="feedback"><h2>How would Bella feel?</h2><p>Snatching could hurt feelings. Danny can choose a fair solution.</p><a class="btn" href="#p8">Try Again</a></div></section>
-<section class="page" id="turns3"><div class="feedback"><h2>Fair choice! ⭐</h2><p>Taking turns is a good solution. Danny has another idea: they can use the stickers together.</p><a class="btn good" href="#p9">Continue</a></div></section>
-<section class="page" id="p9"><div class="book" data-i="9"><div class="loading">Loading cartoon…</div></div><div class="nav"><a class="btn secondary" href="#p8">Back</a><a class="btn" href="#cover">Read Again</a></div></section>
+<section class="page" id="p4"><div class="book p4" role="img" aria-label="Danny asks Bella politely"></div><div class="nav"><a class="btn secondary" href="#p3">Back</a><a class="btn" href="#p5">Next</a></div></section>
+<section class="page" id="p5"><div class="book p5" role="img" aria-label="Bella accidentally bumps Danny's picture"></div><div class="nav"><a class="btn secondary" href="#p4">Back</a><a class="btn" href="#p6">Next</a></div></section>
+<section class="page" id="p6"><div class="book p6" role="img" aria-label="What should Danny do when he feels upset?"><div class="hotspots"><a href="#wrong2a" aria-label="Yell"></a><a href="#p7" aria-label="Take a deep breath and talk"></a><a href="#wrong2b" aria-label="Rip the paper"></a></div></div><div class="hint">Tap one of the three choices in the picture.</div><div class="nav"><a class="btn secondary" href="#p5">Back</a></div></section>
+<section class="page" id="wrong2a"><div class="feedback"><h2>Try again</h2><p>Yelling makes the problem harder. Danny can calm his body and use his words.</p><a class="btn" href="#p6">Choose Again</a></div></section>
+<section class="page" id="wrong2b"><div class="feedback"><h2>Try again</h2><p>Ripping the paper makes the problem bigger. Danny can breathe and talk.</p><a class="btn" href="#p6">Choose Again</a></div></section>
+<section class="page" id="p7"><div class="book p7" role="img" aria-label="Danny takes a breath and uses calm words"></div><div class="nav"><a class="btn secondary" href="#p6">Back</a><a class="btn" href="#p8">Next</a></div></section>
+<section class="page" id="p8"><div class="book p8" role="img" aria-label="What should Danny do with the last sticker sheet?"><div class="hotspots"><a href="#wrong3" aria-label="Snatch it"></a><a href="#turns3" aria-label="Take turns"></a><a href="#p9" aria-label="Share together"></a></div></div><div class="hint">Tap one of the three choices in the picture.</div><div class="nav"><a class="btn secondary" href="#p7">Back</a></div></section>
+<section class="page" id="wrong3"><div class="feedback"><h2>Try again</h2><p>Snatching could hurt feelings. Danny can choose a fair solution.</p><a class="btn" href="#p8">Choose Again</a></div></section>
+<section class="page" id="turns3"><div class="feedback"><h2>Fair choice ⭐</h2><p>Taking turns is a good solution. Danny and Bella can also share together.</p><a class="btn good" href="#p9">Continue</a></div></section>
+<section class="page" id="p9"><div class="book p9" role="img" aria-label="Danny and Bella finish their rainbow together"></div><div class="nav"><a class="btn secondary" href="#p8">Back</a><a class="btn" href="./?v=4">Read Again</a></div></section>
 </div>
-<script>
-(function(){
-  var data=window.__story||'';
-  if(!data){document.querySelectorAll('.loading').forEach(function(x){x.textContent='Cartoon failed to load';});return;}
-  var uri='url("data:image/webp;base64,'+data+'")';
-  document.querySelectorAll('.book').forEach(function(el){
-    var i=Number(el.dataset.i||0);
-    el.style.backgroundImage=uri;
-    el.style.backgroundPosition='center '+(i*100/9)+'%';
-    el.classList.add('ready');
-  });
-})();
-</script>
-</body></html>
+</body>
+</html>
