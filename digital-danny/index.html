@@ -115,6 +115,11 @@
 
     .read-button[hidden] { display: none; }
 
+    .read-button:disabled {
+      cursor: wait;
+      opacity: .68;
+    }
+
     .status-panel {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -491,7 +496,8 @@
           <span>A choice story for Bella</span>
         </div>
       </div>
-      <button class="read-button" id="readButton" type="button">🔊 Read aloud</button>
+      <button class="read-button" id="readButton" type="button" aria-pressed="false">🔊 Read aloud</button>
+      <audio id="narrationPlayer" preload="metadata"></audio>
     </header>
 
     <section class="status-panel" id="statusPanel" aria-label="Danny's relationship signals" hidden>
@@ -509,6 +515,7 @@
     </article>
 
     <p class="footer-note" id="footerNote">Every choice moves the story forward. There is no wrong page.</p>
+    <p class="footer-note">Narration is AI-generated.</p>
   </main>
 
   <script>
@@ -523,6 +530,14 @@
     */
 
     const ASSET = "v2-assets/";
+    const NARRATION_ASSET = "audio/";
+    /*
+      📌 Purpose: Replace the device's robotic speech engine with one consistent, pre-generated story voice.
+      ❓ Business Question: Can Bella hear every consequence and ending in the same warm, very slow narration style?
+      👉 Yes. Each story node maps to its own compact MP3, and the same button controls play, pause, continue, and replay.
+      🧠 Logic Summary: render() selects the current node's audio file; prepareNarration() resets the player;
+         readCurrentPage() toggles playback; audio events keep the button label and accessibility state accurate.
+    */
 
     const storyNodes = {
       cover: {
@@ -1199,6 +1214,7 @@
       ribbon: document.getElementById("choiceRibbon"),
       status: document.getElementById("statusPanel"),
       read: document.getElementById("readButton"),
+      audio: document.getElementById("narrationPlayer"),
       footer: document.getElementById("footerNote"),
       meters: {
         voice: document.getElementById("voiceMeter"),
@@ -1393,12 +1409,7 @@
         return;
       }
 
-      if ("speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-        elements.read.hidden = false;
-      } else {
-        elements.read.hidden = true;
-      }
+      prepareNarration(state.current, node.title);
 
       elements.status.hidden = node.kind === "cover";
       elements.ribbon.hidden = !state.lastChoice || node.kind === "cover";
@@ -1474,23 +1485,69 @@
       });
     }
 
-    function readCurrentPage() {
-      const node = storyNodes[state.current];
-      if (!node || !("speechSynthesis" in window)) return;
+    function setReadButton(label, isPlaying = false, isDisabled = false) {
+      /*
+        ❓ What does this expression do? Why do we need it?
+        👉 It updates visible and screen-reader playback state together so the narration control never gives Bella conflicting feedback.
+      */
+      elements.read.textContent = label;
+      elements.read.disabled = isDisabled;
+      elements.read.setAttribute("aria-pressed", String(isPlaying));
+    }
 
-      const choiceWords = node.kind === "choice"
-        ? ` ${node.prompt} ${node.choices.map(choice => choice.label).join(". ")}.`
-        : "";
-      const endingWords = node.kind === "ending" ? ` What Danny learned: ${node.lesson}` : "";
-      const words = `${node.title}. ${node.text.join(" ")}${choiceWords}${endingWords}`;
-      const speech = new SpeechSynthesisUtterance(words);
-      speech.rate = .88;
-      speech.pitch = 1.03;
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(speech);
+    function stopNarration() {
+      /*
+        ❓ What does this expression do? Why do we need it?
+        👉 It stops the previous scene immediately so narration from one branch cannot continue over the result of the next choice.
+      */
+      elements.audio.pause();
+      elements.audio.currentTime = 0;
+    }
+
+    function prepareNarration(nodeId, title) {
+      /*
+        ❓ What does this expression do? Why do we need it?
+        👉 It maps the current story-node ID to its matching MP3 and resets the button before Bella starts listening.
+      */
+      stopNarration();
+      elements.audio.src = `${NARRATION_ASSET}${nodeId}.mp3`;
+      elements.audio.load();
+      elements.read.hidden = false;
+      elements.read.setAttribute("aria-label", `Read aloud: ${title}`);
+      setReadButton("🔊 Read aloud");
+    }
+
+    async function readCurrentPage() {
+      /*
+        ❓ What does this expression do? Why do we need it?
+        👉 It gives one large button four predictable behaviors: play a fresh page, pause it, continue it, or restart it after the track ends.
+      */
+      if (!elements.audio.paused) {
+        elements.audio.pause();
+        return;
+      }
+
+      if (elements.audio.ended) elements.audio.currentTime = 0;
+      setReadButton("⏳ Loading…", false, true);
+
+      try {
+        await elements.audio.play();
+      } catch (error) {
+        setReadButton("🔊 Play narration");
+      }
     }
 
     elements.read.addEventListener("click", readCurrentPage);
+    elements.audio.addEventListener("playing", () => setReadButton("⏸ Pause", true));
+    elements.audio.addEventListener("waiting", () => setReadButton("⏳ Loading…", false, true));
+    elements.audio.addEventListener("canplay", () => {
+      if (elements.audio.paused && elements.audio.currentTime === 0) setReadButton("🔊 Read aloud");
+    });
+    elements.audio.addEventListener("pause", () => {
+      if (!elements.audio.ended && elements.audio.currentTime > 0) setReadButton("▶ Continue");
+    });
+    elements.audio.addEventListener("ended", () => setReadButton("↻ Read again"));
+    elements.audio.addEventListener("error", () => setReadButton("🔇 Audio unavailable", false, true));
     state.scenesSeen = 1;
     render();
   </script>
